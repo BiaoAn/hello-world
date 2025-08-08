@@ -11,10 +11,10 @@
       body {
         margin: 12px;
         font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
-        min-width: 240px;
+        min-width: 260px;
       }
       h1 { font-size: 16px; margin: 0 0 10px; }
-      .row { display: flex; gap: 8px; }
+      .row { display: flex; gap: 8px; margin-bottom: 8px; }
       button {
         flex: 1;
         padding: 8px 10px;
@@ -24,17 +24,22 @@
         cursor: pointer;
       }
       button:hover { background: #eee; }
-      #status { margin-top: 10px; font-size: 12px; opacity: 0.85; min-height: 18px; }
+      #status { margin-top: 6px; font-size: 12px; opacity: 0.9; min-height: 18px; }
       .ok { color: #2e7d32; }
       .err { color: #c62828; }
+      .muted { opacity: 0.8; font-size: 12px; }
     </style>
   </head>
   <body>
-    <h1>截图（可视区域）</h1>
+    <h1>截图</h1>
+    <div class="row">
+      <button id="select">选择区域</button>
+    </div>
     <div class="row">
       <button id="save">保存到本地</button>
       <button id="copy">复制到剪贴板</button>
     </div>
+    <div class="muted">未选择时默认截取可视区域；选择后保存/复制将使用选区。</div>
     <div id="status"></div>
     <script src="popup.js"></script>
   </body>
