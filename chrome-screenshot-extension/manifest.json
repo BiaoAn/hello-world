@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "一键截图：保存或复制",
-  "version": "1.0.0",
-  "description": "截取当前标签页可视区域，保存到本地或复制到剪贴板。",
+  "version": "1.1.0",
+  "description": "截取当前标签页可视区域，保存到本地或复制到剪贴板。支持手动框选区域。",
   "permissions": [
     "activeTab",
     "tabs",
@@ -11,6 +11,10 @@
     "clipboardWrite",
     "scripting"
   ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
   "action": {
     "default_title": "截图",
     "default_popup": "popup.html"
