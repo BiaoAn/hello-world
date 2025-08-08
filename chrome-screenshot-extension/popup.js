@@ -111,12 +111,34 @@ selectBtn.addEventListener("click", async () => {
   setStatus("请在页面上拖拽选择区域，完成后可重新打开此窗口保存/复制");
   try {
     const tab = await getActiveTab();
+
+    const url = tab?.url || "";
+    const isChromeUrl = url.startsWith("chrome://");
+    const isChromeWebStore = url.startsWith("https://chrome.google.com/webstore");
+    const isExtensionUrl = url.startsWith("chrome-extension://");
+    const isEdgeAddons = url.startsWith("https://microsoftedge.microsoft.com/addons");
+    const isFileUrl = url.startsWith("file://");
+
+    if (isChromeUrl || isChromeWebStore || isExtensionUrl || isEdgeAddons) {
+      setStatus("该页面受浏览器保护，无法选择区域。请在普通网页（http/https）使用。", "err");
+      return;
+    }
+    if (isFileUrl) {
+      setStatus("文件页面可能受限。请在扩展详情中开启“允许访问文件网址”，或在 http/https 页面使用。", "err");
+      return;
+    }
+
     await chrome.scripting.executeScript({
       target: { tabId: tab.id },
       files: ["select-region.js"],
     });
   } catch (err) {
-    setStatus(`无法启动选择：${err.message || err}`, "err");
+    const msg = (err && err.message) || String(err);
+    if (/Cannot access.*chrome:\/\//i.test(msg)) {
+      setStatus("该页面受浏览器保护，无法选择区域。请在普通网页（http/https）使用。", "err");
+    } else {
+      setStatus(`无法启动选择：${msg}`, "err");
+    }
   }
 });
 
