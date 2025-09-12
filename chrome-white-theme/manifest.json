@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "Pure White Theme",
+  "version": "1.0.0",
+  "description": "A clean, pure white Chrome theme with dark text.",
+  "theme": {
+    "colors": {
+      "frame": [255, 255, 255],
+      "toolbar": [255, 255, 255],
+      "tab_text": [0, 0, 0],
+      "tab_background_text": [80, 80, 80],
+      "bookmark_text": [0, 0, 0],
+      "ntp_background": [255, 255, 255],
+      "ntp_text": [0, 0, 0]
+    },
+    "properties": {
+      "ntp_background_alignment": "center",
+      "ntp_background_repeat": "no-repeat"
+    }
+  }
+}
